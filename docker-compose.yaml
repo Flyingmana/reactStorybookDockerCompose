@@ -1,0 +1,21 @@
+version: "3.0"
+
+services:
+  nodejs:
+    build: ./build/nodejs/
+#    depends_on:
+#      - yarn-install
+    volumes:
+      - ./data/project/:/srv/project/:cached
+    ports:
+      - "9009:9009"
+    tty: true
+    stdin_open: true
+    entrypoint: "yarn start" 
+  yarn-install:
+    build: ./build/nodejs/
+    volumes:
+      - ./data/project/:/srv/project/:cached
+    tty: true
+    stdin_open: true
+    command: "yarn install"
